@@ -1,6 +1,5 @@
 #include "ToolBar.h"
 
-
 LRESULT CALLBACK ChildToolBar(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)

@@ -1,5 +1,69 @@
 #include "WebController.h"
 
+void addBackButton(HWND hWnd)
+{
+	HWND hwndButton = CreateWindow(
+		L"BUTTON",  // Predefined class; Unicode assumed 
+		L"BACK",      // Button text 
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+		10,         // x position 
+		15,         // y position 
+		45,        // Button width
+		30,        // Button height
+		hWnd,     // Parent window
+		NULL,       // No menu.
+		(HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+		NULL);      // Pointer not needed.
+}
+void addForwardButton(HWND hWnd) 
+{
+	HWND hwndButton = CreateWindow(
+		L"BUTTON",  // Predefined class; Unicode assumed 
+		L"FORWARD",      // Button text 
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+		55,         // x position 
+		15,         // y position 
+		45,        // Button width
+		30,        // Button height
+		hWnd,     // Parent window
+		NULL,       // No menu.
+		(HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+		NULL);      // Pointer not needed.
+}
+
+void addReloadButton(HWND hWnd) 
+{
+	HWND hwndButton = CreateWindow(
+		L"BUTTON",  // Predefined class; Unicode assumed 
+		L"RELOAD",      // Button text 
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+		100,         // x position 
+		15,         // y position 
+		45,        // Button width
+		30,        // Button height
+		hWnd,     // Parent window
+		NULL,       // No menu.
+		(HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+		NULL);      // Pointer not needed.
+}
+
+void addUrlTextBox(HWND hWnd) 
+{
+	HWND hwndTextField = CreateWindow(
+		L"EDIT",
+		L"", 
+		WS_CHILD | WS_VISIBLE | WS_BORDER,
+		150, 
+		470, 
+		45, 
+		30, 
+		hWnd, 
+		NULL,
+		(HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+		NULL);
+}
+
+void addGoButton(HWND hWnd) {}
 
 LRESULT CALLBACK ChildWebController(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -15,6 +79,11 @@ LRESULT CALLBACK ChildWebController(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 		break;
 	case WM_CREATE:
+		addBackButton(hWnd);
+		addForwardButton(hWnd);
+		addReloadButton(hWnd);
+		addUrlTextBox(hWnd);
+		addGoButton(hWnd);
 		break;
 	case WM_CLOSE:
 		DestroyWindow(hWnd);
@@ -45,7 +114,7 @@ WebController::WebController(HWND hWnd)
 	int height = 30;
 	RECT rect;
 	rect.left = 0;
-	rect.top = 0;
+	rect.top = 10;
 	rect.right = rect.left + width;
 	rect.bottom = rect.top + height;
 	AdjustWindowRect(&rect, style, true);
