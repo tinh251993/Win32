@@ -1,22 +1,21 @@
 #pragma once
-#ifndef  TOOLBAR_H
-#define  TOOLBAR_H
+#ifndef  TABBAR_H
+#define  TABBAR_H
 
 #include <Windows.h>
 #include <vector>
 #include <string>
 #include "WebController.h"
-#include "TabBar.h"
 
-class  ToolBar
+class  TabBar
 {
 public:
 	//Default method
-	ToolBar() = delete; //Initialize
-	ToolBar(HWND hWnd);
-	~ToolBar(); //Destroy
-	ToolBar& operator =(const ToolBar&) = delete;
-	ToolBar(const ToolBar&) = delete;
+	TabBar() = delete; //Initialize
+	TabBar(HWND hWnd);
+	~TabBar(); //Destroy
+	TabBar& operator =(const TabBar&) = delete;
+	TabBar(const TabBar&) = delete;
 
 	//Method
 	bool			ProcessMesage();
@@ -26,6 +25,5 @@ private:
 	HINSTANCE			m_hInstance;
 	HWND				m_hWnd;
 	WebController*		m_webController;
-	TabBar* m_tabBar;
 };
 #endif // ! TOOLBAR_H

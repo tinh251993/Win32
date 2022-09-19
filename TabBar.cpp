@@ -1,6 +1,6 @@
-#include "ToolBar.h"
+#include "TabBar.h"
 
-LRESULT CALLBACK ChildToolBar(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK ChildTablBar(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -25,16 +25,16 @@ LRESULT CALLBACK ChildToolBar(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
 	return  DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
-ToolBar::ToolBar(HWND hWnd)
+TabBar::TabBar(HWND hWnd)
 	: m_hInstance(GetModuleHandle(nullptr))
 {
-	const wchar_t* CLASS_NAME = L"ToolBar";
+	const wchar_t* CLASS_NAME = L"TabBar";
 	WNDCLASS wndClass = {};
 	wndClass.lpszClassName = CLASS_NAME;
 	wndClass.hInstance = m_hInstance;
 	wndClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
 	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndClass.lpfnWndProc = ChildToolBar;
+	wndClass.lpfnWndProc = ChildTablBar;
 
 	RegisterClass(&wndClass);
 
@@ -43,8 +43,8 @@ ToolBar::ToolBar(HWND hWnd)
 	int width = 1200;
 	int height = 60;
 	RECT rect;
-	rect.left = 310;
-	rect.top = 30;
+	rect.left = 0;
+	rect.top = 60;
 	rect.right = rect.left + width;
 	rect.bottom = rect.top + height;
 	AdjustWindowRect(&rect, style, true);
@@ -63,13 +63,11 @@ ToolBar::ToolBar(HWND hWnd)
 		m_hInstance,
 		NULL
 	);
-	m_webController = new WebController(m_hWnd);
-	m_tabBar = new TabBar(m_hWnd);
 	ShowWindow(m_hWnd, SW_SHOW);
 }
 
-ToolBar::~ToolBar()
+TabBar::~TabBar()
 {
-	const wchar_t* CLASS_NAME = L"ToolBar";
+	const wchar_t* CLASS_NAME = L"TabBar";
 	UnregisterClass(CLASS_NAME, m_hInstance);
 }
